@@ -200,6 +200,9 @@ def init_translator(state):
         else:
             from backend.euxfel import EUxfelPulseTranslator
             return EUxfelPulseTranslator(state)
+    elif(state['Facility'].lower() == "eli"):
+        from backend.eli import ELITranslator
+        return ELITranslator(state)
 
     else:
         raise ValueError('Facility %s not supported' % (state['Facility']))
