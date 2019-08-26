@@ -17,7 +17,7 @@ state = {
 def onEvent(evt):
     analysis.event.printProcessingRate()
     # print("Got event({}): {}".format(evt.event_id(), evt.keys()))
-    print(evt['data'].items())
+    # print(evt['data'].items())
     # print("Data: name: {}, data: {}".format(evt['Data'].name, evt['Data'].data))
     plotting.line.plotHistogram(evt['data']['value'])
     # time.sleep(0.1)

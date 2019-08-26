@@ -53,6 +53,7 @@ class ELITranslator(object):
 
 
     def _record_from_no(self, no):
+        # print("changing record to Record_{}".format(no))
         return "Record_{}".format(no)
 
     def _next_file(self):
@@ -72,14 +73,16 @@ class ELITranslator(object):
                 time.sleep(self._sleep_interval)
                 self._next_file() # TODO: fix recursion depth
 
+        # print("file: {}".format(file))
         self._current_file = h5py.File(file, 'r')
         self._current_file_name = file
 
     def _files(self):
-        return ["{}/{}".format(self._data_source, f) for f in listdir(self._data_source)]
+        return ["{}/{}".format(self._data_source, f) for f in listdir(self._data_source) if f.endswith('.h5')]
 
     def event_id(self, evt):
-        return evt.id.id
+        # return evt.id.id
+        return float(time.time())
 
     def translate(self, evt, key):
         values = {}
