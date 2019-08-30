@@ -4,7 +4,7 @@ After=network.target
 
 [Service]
 Type=simple
-ExecStart=python3.6 /opt/hummingbird/hummingbird.py
+ExecStart=/usr/bin/python3.6 /opt/hummingbird/hummingbird.py -b /opt/hummingbird/examples/basic/dummy.py
 
 [Install]
 WantedBy=multi-user.target

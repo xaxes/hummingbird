@@ -41,3 +41,19 @@
         PYTHONPATH: /usr/lib64/python2.7/site-packages/openmpi
         PATH: /usr/lib64/openmpi/bin:{{ ansible_env.PATH }}
         LD_LIBRARY_PATH: /usr/lib64/openmpi/lib
+
+
+- name: Install Hummingbird
+  hosts: all
+  tasks:
+
+    - name: Install systemd service file
+      copy:
+        src: ./hummingbird.service
+        dest: /etc/systemd/system/hummingbird.service
+        owner: root
+        group: root
+        mode: '0644'
+    - name: Reload systemd
+      systemd:
+        daemon_reload: yes
