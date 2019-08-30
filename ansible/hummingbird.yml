@@ -1,0 +1,43 @@
+---
+
+- name: Fetch Hummingbird
+  hosts: all
+  tasks:
+
+    - name: Install Git
+      yum:
+        name: git
+    - name: Clone repo
+      git:
+        repo: https://github.com/xaxes/hummingbird
+        dest: /opt/hummingbird
+      
+
+- name: Install dependencies
+  hosts: all
+  tasks:
+
+    - name: Install Python 3.6
+      yum:
+        name: "{{packages}}"
+      vars:
+        packages:
+          - python36
+          - python36-pip
+    - name: Install mpi4py dependencies
+      yum:
+        name: "{{packages}}"
+      vars:
+        packages:
+          - environment-modules
+          - gcc
+          - openmpi-devel
+          - python36-devel
+    - name: Install pip dependencies
+      pip:
+        requirements: /opt/hummingbird/requirements.txt
+        executable: pip3.6
+      environment:
+        PYTHONPATH: /usr/lib64/python2.7/site-packages/openmpi
+        PATH: /usr/lib64/openmpi/bin:{{ ansible_env.PATH }}
+        LD_LIBRARY_PATH: /usr/lib64/openmpi/lib
