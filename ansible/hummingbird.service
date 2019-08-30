@@ -1,0 +1,10 @@
+[Unit]
+Description=Hummingbird experiment analyser
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=python3.6 /opt/hummingbird/hummingbird.py
+
+[Install]
+WantedBy=multi-user.target
